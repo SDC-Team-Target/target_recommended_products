@@ -18,19 +18,12 @@ CREATE TABLE `items` (
   PRIMARY KEY (`item_id`),
   FOREIGN KEY (`category`) REFERENCES `categories` (`category_id`));
 
--- LOAD DATA LOCAL INFILE "../data_test.csv" INTO TABLE boatdb.boats
--- FIELDS TERMINATED BY ','
--- LINES TERMINATED BY '\n'
--- IGNORE 1 LINES
--- (item_id, item_name, category, item_price, img_url);
 
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES ('1', 'Food');
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES ('2', 'Kitchen');
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES ('3', 'Electronics');
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES ('4', 'Toys');
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES ('5', 'Cleaning Supplies');
-
--- LOCATION: /Users/ariasmariella/dumps/Dump20200805
 
 
 INSERT INTO `items` VALUES 
