@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "react-dev": "webpack -d --watch & live-server"
+    "react-dev": "webpack -d --watch & live-server",
+    "seed": "mysql -u root -p < db/schema.sql"
   },
   "repository": {
     "type": "git",
