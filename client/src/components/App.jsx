@@ -9,37 +9,31 @@ export default class App extends Component {
     super();
     this.state = {
       activeTab: 'More to consider',
-      key: 'home'
+      key: 'more to consider'
     }
-    this.handleTabClick = this.handleTabClick.bind(this);
-  }
-
-  handleTabClick(tab) {
-    this.setState({activeTab: tab});
+   
   }
 
   render() {
-    const{initial, key} = this.state;
+    const{key} = this.state;
     
     return(
-        <Tabs
-        id="controlled-tab-example"
+      <Tabs
+        id=""
         transition={false} 
         activeKey={key}
         onSelect={key => this.setState({ key })}
       >
         <Tab eventKey="more to consider" title="More to consider">
-            more to consider data
-    
+          <Tab1 />
         </Tab>
         <Tab eventKey="similar items" title="Similar items">
-            similar items
-
+          <Tab2 />
         </Tab>
         <Tab eventKey="guests also bought" title="Guests also bought">
-        guests also bought
+          <Tab3 />
         </Tab>
-      </Tabs>
+        </Tabs>
     )
   }
 };
