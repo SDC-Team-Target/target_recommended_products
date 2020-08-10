@@ -1,13 +1,7 @@
 const mysql = require('mysql');
+const mysqlConfig = require('./config.js');
 
-const config = {
-  host: 'localhost',
-  user: 'root',
-  password: 'Yellowbottle',
-  database: 'products'
-};
-
-const connection = mysql.createConnection(config);
+const connection = mysql.createConnection(mysqlConfig);
 
 connection.connect((err)=> {
   if (err) {
@@ -31,7 +25,3 @@ const queryKitchenProducts = function(cb){
 }
 
 module.exports = {queryKitchenProducts};
-
-//query products with category 
-// select items.item_name from items inner join categories
-//  on items.category = categories.category_id and categories.category_name = 'kitchen';
