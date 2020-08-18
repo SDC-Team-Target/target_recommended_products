@@ -1,0 +1,167 @@
+body {
+   background-color: white;
+   font-family: Helvetica, sans-serif;
+   margin: 0 auto;
+   padding: 2rem;
+   font-size: 16px;
+   text-align: center;
+   color: rgb(102, 102, 102);
+   align-content: center;
+}
+
+h3 {
+    margin-top: 16px !important;
+    color:rgb(51, 51, 51);
+    font-weight: bold;
+    line-height: 1.25;
+    font-size: 23px;
+    margin: 0px 0px 8px;
+} 
+
+.column {
+    padding: 10px;
+    text-overflow: ellipsis;
+    width: 13%;
+    margin: 0 auto;
+    text-decoration: underline;   
+}
+
+.column:hover {
+  text-decoration: none;
+  color:rgb(51, 51, 51);
+}
+
+.row {
+  padding-top: 10px;
+}
+
+.row::after {
+  clear: both;
+  content: "";
+  display: table; 
+}
+
+.nav {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid rgb(136, 136, 136);
+  width: 100%;
+  justify-content: center;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: rgb(102, 102, 102);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: 4px solid #CA0813;
+  color:rgb(51, 51, 51);
+  font-weight: 600;
+}
+
+button {
+  line-height: 1.45;
+  font-size: 16px;
+  background-color: white;
+  height: 44px; 
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  overflow: hidden;
+  padding: 0px 12px;
+  margin: 0px;
+  border-radius: 4px;
+  border-color: rgb(136, 136, 136);
+}
+
+img {
+  cursor: pointer;
+}
+
+.more-prod-desc {
+  padding-top: 15px;
+  margin: 0 auto;
+  white-space: nowrap; 
+  /* margin-bottom: 4px !important; */
+}
+
+p {
+  padding:0;
+  margin: 0 auto;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+hr {
+  border-top: 1px solid rgb(136, 136, 136);  
+}
+
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+  align-self: center;
+}
+
+#freqContainer {
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+#freqInnerContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 30px; 
+}
+
+#freqContainer .column {
+  width: max-content;
+  background-color: white;
+  text-decoration: none;
+}
+
+#freqContainer p.freqSubtotal{
+  margin-top: 40px;
+}
+
+input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+input[type=checkbox]:hover {
+  filter: brightness(90%);
+}
+  
+input[type=checkbox]:after {
+  content: " ";
+  background-color:rgb(0, 162, 0);
+  display: inline-block;
+  visibility: visible;
+}
+  
+input[type=checkbox]:checked:after {
+  content: "\2714";
+  border-radius: 3px;
+  border-width: 1px;
+  height: 20px;
+  display: block;
+  width: 20px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: normal;
+  color: white;
+}

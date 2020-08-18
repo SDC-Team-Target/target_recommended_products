@@ -1,0 +1,6 @@
+*.log
+.DS_Store
+node_modules
+public/bundle.js
+db/config.js
+notes.txt
