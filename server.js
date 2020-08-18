@@ -1,16 +1,16 @@
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 const { queryAllProducts, queryByID } = require('./db/index');
+
 const PORT = 4040;
 const app = express();
 
 app.use(express.static('./public'));
 app.use(cors());
 
-//items/:id
+// items/:id
 app.get('/items/:id', (req, res) => {
-  console.log('The requested id:', req.params.id)
+  console.log('The requested id:', req.params.id);
   queryByID(req.params.id, (err, item) => {
     if (err) {
       console.log('Error in server, querying by ID', err);
@@ -30,7 +30,5 @@ app.get('/items', (req, res) => {
     }
   });
 });
-
-
 
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
