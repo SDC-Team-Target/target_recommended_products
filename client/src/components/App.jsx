@@ -51,7 +51,7 @@ export default class App extends Component {
   handleSearchClick() {
     const { productID } = this.state;
 
-    axios.get(`http://ec2-18-222-181-197.us-east-2.compute.amazonaws.com:4040//items/${productID}`)
+    axios.get(`http://ec2-18-222-181-197.us-east-2.compute.amazonaws.com:4040/items/${productID}`)
       .then((prod) => {
         this.setState({ currentCategory: prod.data[0].category });
         this.setState({ currentProduct: prod.data[0] });
