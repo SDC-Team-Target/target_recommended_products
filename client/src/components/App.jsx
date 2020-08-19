@@ -32,7 +32,7 @@ export default class App extends Component {
   }
 
   getAllItems() {
-    axios.get('http://localhost:4040/items/')
+    axios.get('http://ec2-18-222-181-197.us-east-2.compute.amazonaws.com:4040/items/')
       .then((items) => this.setState({ products: items.data }))
       .then(() => console.log('Fetched products'))
       .catch((error) => console.log(`Couldn't fetch kitchen products`, error));
@@ -51,7 +51,7 @@ export default class App extends Component {
   handleSearchClick() {
     const { productID } = this.state;
 
-    axios.get(`http://localhost:4040/items/${productID}`)
+    axios.get(`http://ec2-18-222-181-197.us-east-2.compute.amazonaws.com:4040//items/${productID}`)
       .then((prod) => {
         this.setState({ currentCategory: prod.data[0].category });
         this.setState({ currentProduct: prod.data[0] });
