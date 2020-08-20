@@ -25,10 +25,24 @@ export default class App extends Component {
     this.handleProductInput = this.handleProductInput.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.filterByCategory = this.filterByCategory.bind(this);
+    this.handleProductIdSearch = this.handleProductIdSearch.bind(this);
   }
 
   componentDidMount() {
     this.getAllItems();
+    this.setState({productID: window.product_id || 1});
+    setTimeout(() => {this.handleSearchClick();}, 0);
+    document.addEventListener('click', () => { 
+      this.handleProductIdSearch()})
+  }
+
+  handleProductIdSearch(){
+    if(window.product_id){
+      if(window.product_id !== this.state.productID) {
+        this.setState({productID: window.product_id});
+        this.handleSearchClick();
+      }
+    }
   }
 
   getAllItems() {
@@ -78,15 +92,6 @@ export default class App extends Component {
 
     return (
       <div id="tabs-outerContainer">
-        <div>
-          <label>
-            Product:
-            <input type="text" name="product_id" onChange={this.handleProductInput} placeholder="enter product id" />
-          </label>
-          <button onClick={this.handleSearchClick}>Search</button>
-        </div>
-        <br></br>
-        <br></br>
         <FrequentPanel
           currentProduct={currentProduct}
           extras={extras}
