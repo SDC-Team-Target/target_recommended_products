@@ -25,7 +25,7 @@ const SuggestedProductsList = ({ products }) => {
               />)
             }
           </div>
-          <button
+          <button className="btn-freq-rec"
             onClick={() => {
               showMore(!clicked);
             }}
@@ -34,7 +34,7 @@ const SuggestedProductsList = ({ products }) => {
           </button>
         </div>
       ) : (
-        <button
+        <button className="btn-freq-rec"
           onClick={() => {
             showMore(!clicked);
           }}
