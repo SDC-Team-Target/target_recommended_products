@@ -37,7 +37,6 @@ export default class FrequentPanel extends Component {
 
   componentDidMount() {
     const { extras } = this.state;
-
     this.getTotal();
   }
   
@@ -51,14 +50,14 @@ export default class FrequentPanel extends Component {
       sum += this.props.extras[i].item_price;
     }
     
-    this.setState({ total: sum.toFixed(2) })
+    this.setState({ total: sum.toFixed(2) });
   }
 
   updateAddButton(n) {
     switch (n) {
       case 1: this.setState({ addButton: '' }); 
         break;
-      case 2: this.setState({ addButton: '(2)' }); 
+      case 2: this.setState({ addButton: 'both' }); 
         break;
       case 3: this.setState({ addButton: 'all (3)' }); 
         break;
@@ -195,7 +194,7 @@ export default class FrequentPanel extends Component {
             {total} &nbsp;
             </span>
             ({activeBoxes} items) &nbsp;
-            <button
+            <button className="btn-freq-rec"
               onClick={() => console.log(box1, box2, box3)}
               style={{ fontWeight: 'bold', backgroundColor: '#CA0813', color: 'white' }}
             >
@@ -206,3 +205,10 @@ export default class FrequentPanel extends Component {
       </div>);
   }
 }
+
+
+/*
+Variable names
+Add comments
+Desconstruct this.state
+*/
