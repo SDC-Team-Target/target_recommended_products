@@ -54,11 +54,8 @@ export default class App extends Component {
 
   filterByCategory() {
     const { products, currentCategory, productsByCategory } = this.state;
-    console.log('CURRENT CAT: ', currentCategory)
     const filteredProducts = products.filter((product) => product.category === currentCategory);
-    
-    console.log('FILTERED PRODS: ', filteredProducts);
-
+   
     this.setState({ productsByCategory: filteredProducts });
     this.setState({ additionalProducts: shuffle(filteredProducts) });
   }
