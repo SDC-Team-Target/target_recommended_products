@@ -7,10 +7,9 @@ export default class FrequentPanel extends Component {
     this.state = {
       total: 0,
       extras: this.props.extras,
-      bundle: null,
-      box1: true,
-      box2: true,
-      box3: true,
+      checkBoxLeft: true,
+      checkBoxCenter: true,
+      checkBoxRight: true,
       activeBoxes: 3,
       addButton: 'all (3)',
     };
@@ -20,30 +19,28 @@ export default class FrequentPanel extends Component {
     this.updateAddButton =  this.updateAddButton.bind(this);
   }
 
+  componentDidMount() {
+    this.getTotal();
+
+  }
+  
   componentDidUpdate(prevProps) {
-    if (this.props.currentProduct !== prevProps.currentProduct) {
+    if (this.props.extras[0] !== prevProps.extras[0]) {
       this.getTotal ();
       this.setState({
-        box1: true,
-        box2: true,
-        box3: true,
+        checkBoxLeft: true,
+        checkBoxCenter: true,
+        checkBoxRight: true,
         activeBoxes: 3,
         addButton: 'all (3)',
         extras: this.props.extras,
-        bundle: [],
       });
     }
   }
 
-  componentDidMount() {
-    const { extras } = this.state;
-    this.getTotal();
-  }
-  
   getTotal() {
     var sum = 0;
-    const { extras } = this.state;
-
+   
     sum += this.props.currentProduct.item_price;
 
     for (let i = 0; i < 2; i++) {
@@ -82,7 +79,7 @@ export default class FrequentPanel extends Component {
 
   render() {
     const {
-      extras, total, activeBoxes, addButton, box1, box2, box3,
+      extras, total, activeBoxes, addButton, checkBoxLeft, checkBoxCenter, checkBoxRight,
     } = this.state;
 
     return (
@@ -101,13 +98,13 @@ export default class FrequentPanel extends Component {
                 <div>
                   <input
                     onChange={() => {
-                      if (box1) {
+                      if (checkBoxLeft) {
                         this.updateTotal(this.props.currentProduct.item_price * -1);
-                        this.setState({ box1: !box1 });
+                        this.setState({ checkBoxLeft: !checkBoxLeft });
                         this.updateBoxCount(false);
                       } else {
                         this.updateTotal(this.props.currentProduct.item_price);
-                        this.setState({ box1: !box1 });
+                        this.setState({ checkBoxLeft: !checkBoxLeft });
                         this.updateBoxCount(true);
                       }
                     }}
@@ -128,19 +125,19 @@ export default class FrequentPanel extends Component {
               <div className="more-prod-desc">
                 <p style={{ fontWeight: 'bold' }}>
                   $
-                  {extras[0].item_price}
+                  {extras[0].item_price.toFixed(2)}
                 </p>
                 <p>{cropName(extras[0].item_name)}</p>
                 <div>
                   <input
                     onChange={() => {
-                      if (box2) {
+                      if (checkBoxCenter) {
                         this.updateTotal(extras[0].item_price * -1);
-                        this.setState({ box2: !box2 });
+                        this.setState({ checkBoxCenter: !checkBoxCenter });
                         this.updateBoxCount(false);
                       } else {
                         this.updateTotal(extras[0].item_price);
-                        this.setState({ box2: !box2 });
+                        this.setState({ checkBoxCenter: !checkBoxCenter });
                         this.updateBoxCount(true);
                       }
                     }}
@@ -161,19 +158,19 @@ export default class FrequentPanel extends Component {
               <div className="more-prod-desc">
                 <p style={{ fontWeight: 'bold' }}>
                   $
-                  {extras[1].item_price}
+                  {extras[1].item_price.toFixed(2)}
                 </p>
                 <p>{cropName(extras[1].item_name)}</p>
                 <div>
                   <input
                     onChange={() => {
-                      if (this.state.box3) {
+                      if (this.state.checkBoxCenter) {
                         this.updateTotal(extras[1].item_price * -1);
-                        this.setState({ box3: !box3 });
+                        this.setState({ checkBoxRight: !checkBoxRight });
                         this.updateBoxCount(false);
                       } else {
                         this.updateTotal(extras[1].item_price);
-                        this.setState({ box3: !box3 });
+                        this.setState({ checkBoxRight: !checkBoxRight });
                         this.updateBoxCount(true);
                       }
                     }}
@@ -195,8 +192,12 @@ export default class FrequentPanel extends Component {
             </span>
             ({activeBoxes} items) &nbsp;
             <button className="btn-freq-rec"
-              onClick={() => console.log(box1, box2, box3)}
-              style={{ fontWeight: 'bold', backgroundColor: '#CA0813', color: 'white' }}
+              onClick={() => { 
+                const howMany = [checkBoxLeft, checkBoxCenter, checkBoxRight].filter(box => {
+                  return box === true })
+                // window.setShoppingCart(window.shoppingCart + howMany.length);
+              }}
+              style={{ border: 'none', fontWeight: 'bold', backgroundColor: '#CA0813', color: 'white' }}
             >
               Add {addButton} &nbsp;to cart
             </button>
@@ -204,11 +205,4 @@ export default class FrequentPanel extends Component {
         </div>
       </div>);
   }
-}
-
-
-/*
-Variable names
-Add comments
-Desconstruct this.state
-*/
+} 
