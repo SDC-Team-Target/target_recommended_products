@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import axios from 'axios';
+import { shuffle } from 'underscore';
 import ProductList from './ProductList.jsx';
 import SimilarItemsList from './SimilarItemsList.jsx';
 import SuggestedProductsList from './SuggestedProductsList.jsx';
 import FrequentPanel from './FrequentPanel.jsx';
 import sampleData from '../sampleData';
-import grabRandomItems from '../helpers/grabRandomItems.js';
 
 export default class App extends Component {
   constructor() {
@@ -18,7 +18,7 @@ export default class App extends Component {
       currentCategory: null,
       currentProduct: sampleData[19],
       productsByCategory: sampleData,
-      extras: sampleData.slice(0, 2),
+      additionalProducts: sampleData.slice(0, 2),
     };
 
     this.getAllItems = this.getAllItems.bind(this);
@@ -49,13 +49,18 @@ export default class App extends Component {
     axios.get('http://ec2-18-222-181-197.us-east-2.compute.amazonaws.com:4040/items/')
       .then((items) => this.setState({ products: items.data }))
       .then(() => console.log('Fetched products'))
-      .catch((error) => console.log(`Couldn't fetch kitchen products`, error));
+      .catch((error) => console.log(`Couldn't fetch any products`, error));
   }
 
   filterByCategory() {
-    const { products, currentCategory } = this.state;
+    const { products, currentCategory, productsByCategory } = this.state;
+    console.log('CURRENT CAT: ', currentCategory)
     const filteredProducts = products.filter((product) => product.category === currentCategory);
+    
+    console.log('FILTERED PRODS: ', filteredProducts);
+
     this.setState({ productsByCategory: filteredProducts });
+    this.setState({ additionalProducts: shuffle(filteredProducts) });
   }
 
   handleProductInput(input) {
@@ -71,30 +76,19 @@ export default class App extends Component {
         this.setState({ currentProduct: prod.data[0] });
       })
       .then(() => this.filterByCategory())
-      .then(() => {
-        const { productsByCategory, currentProduct } = this.state;
-        const arr = [];
-        const randos = grabRandomItems(productsByCategory, currentProduct);
-
-        for (let i = 0; i < 2; i++) {
-          arr.push(productsByCategory[randos[i]]);
-        }
-        return arr;
-      })
-      .then((ranArr) => this.setState({ extras: ranArr }))
       .catch((error) => console.log(`Couldn't fetch products by ID`, error));
   }
 
   render() {
     const {
-      key, currentProduct, products, productsByCategory, extras,
+      key, currentProduct, products, productsByCategory, additionalProducts,
     } = this.state;
 
     return (
       <div id="tabs-outerContainer">
         <FrequentPanel
           currentProduct={currentProduct}
-          extras={extras}
+          extras={additionalProducts}
         />
         <h3>Recommended</h3>
         <Tabs
@@ -110,10 +104,13 @@ export default class App extends Component {
             <SimilarItemsList products={productsByCategory} />
           </Tab>
           <Tab eventKey="guests also bought" title="Guests also bought">
-            <SuggestedProductsList products={products} />
+            <SuggestedProductsList products={shuffle(products)} />
           </Tab>
         </Tabs>
         <hr />
+        <img alt="Sponsored. Home essentials, now home delivered. Order with same delivery for contactless Shopping. Target same day delivery. Shopped by SHIPT." 
+          className="heroImg" src="https://tpc.googlesyndication.com/simgad/14598546974536872415?"></img>
+          <span style={{margin: 0 , float: 'right', paddingBottom: '20px', fontSize: '10px'}}>sponsored</span>
       </div>
     );
   }
