@@ -32,6 +32,7 @@ export default class App extends Component {
     this.getAllItems();
     this.setState({productID: window.product_id || 1});
     setTimeout(() => {this.handleSearchClick();}, 0);
+
     document.addEventListener('click', () => { 
       this.handleProductIdSearch()})
   }
@@ -53,8 +54,9 @@ export default class App extends Component {
   }
 
   filterByCategory() {
-    const { products, currentCategory, productsByCategory } = this.state;
-    const filteredProducts = products.filter((product) => product.category === currentCategory);
+    const { products, currentCategory, productID } = this.state;
+    const filteredProducts = products.filter((product) => {
+      return product.category === currentCategory && product.item_id !== productID});
    
     this.setState({ productsByCategory: filteredProducts });
     this.setState({ additionalProducts: shuffle(filteredProducts) });

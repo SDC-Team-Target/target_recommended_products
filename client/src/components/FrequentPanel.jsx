@@ -164,7 +164,7 @@ export default class FrequentPanel extends Component {
                 <div>
                   <input
                     onChange={() => {
-                      if (this.state.checkBoxCenter) {
+                      if (checkBoxRight) {  
                         this.updateTotal(extras[1].item_price * -1);
                         this.setState({ checkBoxRight: !checkBoxRight });
                         this.updateBoxCount(false);
@@ -195,7 +195,7 @@ export default class FrequentPanel extends Component {
               onClick={() => { 
                 const howMany = [checkBoxLeft, checkBoxCenter, checkBoxRight].filter(box => {
                   return box === true })
-                // window.setShoppingCart(window.shoppingCart + howMany.length);
+                window.setShoppingCart(window.shoppingCart + howMany.length);
               }}
               style={{ border: 'none', fontWeight: 'bold', backgroundColor: '#CA0813', color: 'white' }}
             >
