@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { queryAllProducts, queryByID } = require('./db/index');
+const { queryAllProducts, queryByID, addProduct, updateProduct, deleteProduct } = require('./db/index');
 
 const PORT = 4040;
 const app = express();
@@ -27,6 +27,36 @@ app.get('/items', (req, res) => {
       res.status(500).send('Could not retrieve items');
     } else {
       res.status(200).send(items);
+    }
+  });
+});
+
+app.delete('/items/:id', (req, res) => {
+  deleteProduct(req.params.id, (err, confirmation) => {
+    if (err) {
+      res.status(500).send('Error deleting product: ', err);
+    } else {
+      res.status(200).send('Product deleted.');
+    }
+  });
+});
+
+app.post('/items/:id', (req, res) => {
+  addProduct(req.query, (err, confirmation) => {
+    if (err) {
+      res.status(500).send('Error adding product: ', err);
+    } else {
+      res.status(200).send('Product added.');
+    }
+  });
+});
+
+app.put('/items/:id', (req, res) => {
+  updateProduct(req.query, (err, confirmation) => {
+    if (err) {
+      res.status(500).send('Error updating product: ', err);
+    } else {
+      res.status(200).send('Product updated.');
     }
   });
 });
