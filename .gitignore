@@ -2,5 +2,8 @@
 .DS_Store
 node_modules
 public/bundle.js
-db/config.js
+db/legacy/config.js
+db/postgres/configPG.js
 notes.txt
+db/data/products.csv
+db/data/departments.csv
